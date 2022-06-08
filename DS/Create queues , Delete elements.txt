@@ -1,0 +1,88 @@
+// Static queue and it's applications
+#include <iostream>
+using namespace std;
+
+class apple
+{
+public:
+	static const int size = 5;
+	int front, rear;
+	int queue[size];
+	apple();
+	void insertion(int x);
+	int deletion();
+	void display();
+
+};
+
+apple::apple()
+{
+	front = rear = -1;
+}
+
+void apple::insertion(int x)
+{
+	if (((rear - front) == (size - 1)) && (rear == (size - 1)))
+	{
+		cout << "Queue id empty";
+	}
+	else if (front == -1)
+	{
+		queue[++rear] = x;
+		front = 0;
+	}
+	else if (rear < (size - 1))
+	{
+		queue[++rear] = x;
+	}
+
+}
+
+int apple::deletion()
+{
+	int a;
+	if ((rear == -1) || (front == -1))
+	{
+		cout << "Queue is empty";
+	}
+	else
+	{
+		a = queue[front];
+		front++;
+	}
+	return a;
+}
+
+void apple::display()
+{
+	if (front >= 0)
+	{
+		for (int s = front; s <= rear; s++)
+		{
+			cout << queue[s] << " " ;
+
+		}
+	}
+}
+
+int main()
+{
+	apple abc;
+	int r;
+
+	for (int z = 0; z < 5; z++)
+	{
+		cout << "Enter the elements of queue\n";
+		cin >> r;
+		abc.insertion(r);
+	}
+
+	abc.display();
+	cout << endl;
+	abc.deletion();
+	cout << endl;
+	abc.display();
+
+
+}
+

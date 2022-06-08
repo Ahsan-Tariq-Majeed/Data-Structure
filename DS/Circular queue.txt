@@ -1,0 +1,110 @@
+#include <iostream>
+using namespace std;
+
+class apple
+{
+public:
+	static const int size = 5;
+	int front, rear;
+	int queue[size];
+	apple();
+	void insertion(int x);
+	int deletion();
+	void display();
+	int empty();
+};
+
+apple::apple()
+{
+	front = rear = -1;
+}
+
+void apple::insertion(int x)
+{
+	if ((rear + 1) % size != front)
+	{
+		rear = (rear + 1) % size;
+		queue[rear] = x;
+
+		if (front < 0)
+		{
+			front = 0;
+		}
+
+	}
+
+	else
+	{
+		cout << "Stack is full";
+	}
+}
+
+int apple::empty()
+{
+	if (front == -1)
+		return 1;
+	else
+		return 0;
+}
+
+
+int apple::deletion()
+{
+	int a = 0;
+
+	if (!empty())
+	{
+		if (front == rear)
+		{
+			a = queue[front];
+			front = rear = -1;
+		}
+		else
+			a = queue[front];
+		front = (front + 1) % size;
+	}
+
+	else
+	{
+		cout << "Queue is empty";
+	}
+
+	return a;
+}
+
+
+
+void apple ::display()
+{
+	if (empty())
+	{
+		cout << "Queue is empty\n";
+
+	}
+
+	else
+	{
+		while (front != rear)
+		{
+			cout << queue[front];
+			front = (front + 1) % size;
+		}
+		cout << queue[front];
+	}
+}
+
+int main()
+{
+	apple abc;
+	int c;
+	for (int a = 0; a < 5; a++)
+	{
+		cout << "Enter the elements of queue\n";
+		cin >> c;
+		abc.insertion(c);
+	}
+
+	abc.display();
+	cout << endl;
+
+}

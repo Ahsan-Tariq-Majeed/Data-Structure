@@ -1,0 +1,138 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+	int data;
+	Node* address;
+
+};
+
+class Making_list
+{
+public:
+	Node* first, *last;
+	Making_list()
+	{
+		first = NULL;
+	}
+	void Insert_at_start(int x);
+	void Insert_in_the_middle(int val, int pos);
+	void Insert_at_end(int z);
+	void Display();
+};
+
+void Making_list::Insert_at_start(int x)
+{
+	Node* temp;
+	temp = first;
+		if (first == NULL)
+		{
+			first = new Node;
+			first->data = x;
+			first->address = NULL;
+			last = first;
+
+		}
+
+		else
+		{
+			temp = new Node;
+			temp->data = x;
+			temp->address = first;
+			first = temp;
+
+		}
+
+}
+
+void Making_list::Insert_at_end(int x)
+{
+	Node* temp;
+	temp = first;
+	if (first == NULL)
+	{
+		first = new Node;
+		first->data = x;
+		first->address = NULL;
+		last = first;
+
+	}
+
+	else
+	{
+		temp = new Node;
+		temp->data = x;
+		temp->address = NULL;
+		last->address = temp;
+		last = temp;
+
+	}
+}
+
+void Making_list::Insert_in_the_middle(int val, int pos)
+{
+	Node *ptr;
+	ptr = new Node;
+
+	Node *ptr1 = first;
+	int a = 0;
+	while (a != pos - 1)
+	{
+		ptr1 = ptr1->address;
+		a++;
+	}
+	ptr->data = val;
+	ptr->address = ptr1->address;
+	ptr1->address = ptr;
+
+}
+
+void Making_list::Display()
+{
+	Node* temp;
+	temp = first;
+	while (temp!= NULL)
+	{
+		cout << temp->data << " ";
+		temp = temp->address;
+	}
+}
+
+int main()
+{
+	Making_list abc;
+	int num, num1,val,pos;
+	cout << "Enter the lenght of the loop\n";
+	cin >> num;
+
+	for (int i = 0; i < num; i++)
+	{
+		cout << "Enter the elements\n";
+		cin >> num1;
+		abc.Insert_at_start( num1);
+	}
+	abc.Display();
+	cout << endl;
+
+	for (int i = 0; i < num; i++)
+	{
+		cout << "Enter the elements\n";
+		cin >> num1;
+		abc.Insert_at_end(num1);
+	}
+	cout << endl;
+	abc.Display();
+
+	cout << "Enter the value to change\n";
+	cin >> val;
+	cout << "Enter the postion\n";
+	cin >> pos;
+
+	abc.Insert_in_the_middle(val,pos);
+
+	cout << endl;
+	abc.Display();
+
+}

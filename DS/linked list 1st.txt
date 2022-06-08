@@ -1,0 +1,79 @@
+code to write a linked list 
+
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+	int data;
+	Node* next;
+};
+
+class List
+{
+public:
+	Node *first, *end;
+
+	List()
+	{
+		first = NULL;
+	}
+
+	void Insert(int x);
+	void Display();
+};
+
+void List::Insert(int x)
+{
+
+	if (first == NULL)
+	{
+		first = new Node;
+		first->data = x;
+		first->next = NULL;
+		end = first;
+	}
+
+	else
+	{
+		Node* current;
+		current = new Node;
+		current->data = x;
+		current->next = NULL;
+		end->next = current;
+		end = current;
+	}
+
+}
+
+void List::Display()
+{
+	Node* current;
+	current = first;
+	while(current != NULL)
+	{
+		cout << current->data <<" ";
+		current = current->next;
+	}
+}
+
+int main()
+{
+	List abc;
+	int number, num;
+
+	cout << "Enter the lenght of list\n";
+	cin >> num;
+
+	for (int i = 0; i < num; i++)
+	{
+		cout << "\n\nEnter the element ";
+		cin >> number;
+		abc.Insert(number);
+		abc.Display();
+
+	}
+
+	return 0;
+}

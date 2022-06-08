@@ -1,0 +1,106 @@
+// Dynamic Queue and it's applications
+#include <iostream>
+using namespace std;
+
+struct queue
+{
+	int data;
+    queue* next;
+};
+
+class apple
+{
+public:
+	queue* front, *rear;
+	apple();
+	void insertion(int);
+	int deletion();
+	void display();
+};
+
+apple::apple()
+{
+	front = rear = NULL;
+}
+
+void apple::insertion(int x)
+{
+	if (rear == NULL)
+	{
+		rear = new queue;
+		rear->data = x;
+		rear->next = NULL;
+		front = rear;
+	}
+
+	else
+	{
+		queue* temp;
+		temp = new queue;
+		temp->data = x;
+		temp->next = NULL;
+		rear->next = temp;
+		rear = temp;
+	}
+
+}
+
+int apple::deletion()
+{
+	int a = front->data;
+
+	if (front == NULL)
+	{
+		cout << "Queue is empty";
+	}
+
+	else
+	{
+		
+		queue *temp = front;
+		if (front == rear)
+		{
+			front = NULL;
+			rear = NULL;
+			delete temp;
+			return a;
+		}
+		front = front->next;
+	}
+
+	return a;
+}
+
+void apple::display()
+{
+	queue* temp = new queue;
+	temp = front;
+	while (temp!= rear)
+
+	{
+		cout << temp->data << " ";
+		temp = temp->next;
+	}
+}
+
+int main()
+{
+	apple abc;
+	int l,s;
+	cout << "Enter the number of queues\n";
+	cin >> l;
+	for (int q = 0; q < l; q++)
+	{
+		cout << "Enter the elements of queue\n";
+		cin >> s;
+		abc.insertion(s);
+	}
+
+	abc.display();
+	cout << endl;
+
+	abc.deletion();
+	cout << endl;
+	abc.display();
+	
+}

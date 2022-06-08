@@ -1,0 +1,104 @@
+#include <iostream>
+using namespace std;
+
+class node
+
+{
+public:
+	int data;
+	node* address_of_next;
+};
+class Create_list
+{
+public:
+	node* First, * Last;
+	Create_list()
+	{
+		First = NULL;
+	}
+
+	void Insert_at_the_end(int);
+	void Insertion(int value, int pos);
+	void Display();
+
+};
+
+void Create_list::Insert_at_the_end(int x)
+{
+	node* current;
+	current = First;
+
+	if (First == NULL)
+	{
+		First = new node;
+		First->data = x;
+		First->address_of_next = NULL;
+		Last = First;
+	}
+	else
+	{
+		current = new node;
+		current->data = x;
+		current->address_of_next = First;
+		First = current;
+	
+	}
+}
+
+void Create_list::Display()
+{
+	node* temp;
+	temp = First;
+	while (temp != NULL)
+	{
+		cout << temp->data << " ";
+		temp = temp->address_of_next;
+	}
+}
+
+void Create_list :: Insertion(int value, int pos)
+{
+	node *temp;
+	temp = new node();
+	node* x = First;
+	int num = 0;
+	while (num != pos - 1)
+	{
+		x = x->address_of_next;
+		num++;
+
+	}
+	temp->data = value;
+	temp->address_of_next = x->address_of_next;
+	x->address_of_next = temp;
+
+
+}
+
+
+int main()
+{
+	Create_list abc;
+	int val, val1,number1,number2;
+
+	cout << "Enter the lenght of the list\n";
+	cin >> val;
+
+	for (int x = 0; x < val; x++)
+	{
+		cout << "Enter the values\n";
+		cin >> val1;
+		abc.Insert_at_the_end(val1);
+	}
+	abc.Display();
+
+	cout << "Enter the number you want to insert\n";
+	cin >> number1;
+	cout << "Enter the position\n";
+	cin >> number2;
+
+	abc.Insertion(number1, number2);
+	abc.Display();
+
+}
+
